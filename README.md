@@ -1,0 +1,2 @@
+# Programmable-Bidirectional-IR-Remote-Control-Interface
+The goal of this project is to build a device that serves a bidirectional IR interface, capable of learning and playing NEC format commands. The device can be used in later classes as an IoT device after adding a wireless transceiver, allowing remote control to act as a publisher and subscriber in an MQTT-based IoT system. Most parts for the project will be provided in ERB 126. The components of this project are presented in detail in the lectures and lab exercises.
