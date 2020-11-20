@@ -6,12 +6,12 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define DutyCycle 1050
+#define LoadValue 10000
 //speaker transmitter TX -> PE4
-#define speakerTX    (*((volatile uint32_t *)(0x42000000 + (0x40024400-0x40000000)*32 + 4*4))) //bit 4
-#define speakerTX_MASK  16//2^6
+#define speakerTX    (*((volatile uint32_t *)(0x42000000 + (0x400243FC-0x40000000)*32 + 4*4))) //bit 4
+#define speakerTX_MASK  16//2^4
 
 void initSPEAKER_TX(void);
-void playSound(uint8_t address, uint8_t data);
+void playSound();
 
 #endif

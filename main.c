@@ -1,6 +1,22 @@
 //Jorge Avila
 //mavID: 1001543128
 
+/*
+ *
+ * The goal of this project is to build a device that serves a bidirectional IR interface,
+ * The capable of learning and playing NEC format commands. The device can be used in later
+ * The classes as an IoT device after adding a wireless transceiver, allowing remote control
+ * The to act as a publisher and subscriber in an MQTT-based IoT system.
+ * The Most parts for the project will be provided in ERB 126. The components of this project
+ * The are presented in detail in the lectures and lab exercises.
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
 #include "IR_RX.h"
 #include "IR_TX.h"
 #include "SPEAKER_TX.h"
@@ -13,7 +29,7 @@
 
 enum NumeroDeBoton
 {
-    ONE = 1010001001011101, TWO = 0110001010011101
+    NotWorking = 0, Working = 1
 };
 
 //prototypes
@@ -23,13 +39,12 @@ void initHw();
 int main(void)
 {
     initHw();
+    initSPEAKER_TX();
     initIR_TX();
     initIR_RX();
     initUart0();
     initIR_TX();
-    initSPEAKER_TX();
     setUart0BaudRate(115200, 40e6);
-    //playComment(0, 1);
     USER_DATA data;
     while (true)
     {
@@ -67,15 +82,21 @@ int main(void)
         }
         if (isCommand(&data, "SENDB", 1))
         {
-            putsUart0("\nButton was sent.\n");
+            putsUart0("\nButton: ");
             uint8_t botones[] =
                     { 162, 98, 226, 34, 2, 194, 224, 168, 144, 104, 152, 176,
                       48, 24, 122, 16, 56, 90, 66, 74, 82 };
             uint8_t buttonNumber = getFieldInteger(&data, 1);
+            putiUart0(buttonNumber);
+            putsUart0(" was sent.\n");
             //uint8_t it = 0;
             playComment(0, botones[buttonNumber - 1]);
             //playComment(0, 162);
             valid = true;
+
+        }
+        if (isCommand(&data, "PLAY", 0))
+        {
 
         }
         if (!valid)

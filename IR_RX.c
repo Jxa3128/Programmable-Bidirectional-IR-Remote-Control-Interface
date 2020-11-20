@@ -271,7 +271,7 @@ void parseBuffer()
         if (bitNum >= 24 && bitNum < 32)
             datai[bitNum - 24] = getBit();
     }
-    putcUart0('\n');
+    //putcUart0('\n');
 
     if (!checkError())
     {
